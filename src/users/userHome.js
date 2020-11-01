@@ -1,10 +1,10 @@
 import React from "react";
 
 
-let userHome =(props)=>{
+let UserHome =(props)=>{
     return <div>
         <p>User Home</p>
     </div>;
 }
 
-export default userHome;
+export default UserHome;

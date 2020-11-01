@@ -8,14 +8,15 @@ import {
     useHistory,
     useLocation
 } from "react-router-dom";
-import App from "../App";
-import takeExam from "../exams/takeExam";
-import createExam from "../exams/createExam";
-import manageExam from "../exams/manageExam";
-import manageAssignment from "../assignement/manageAssignemnt";
-import userHome from "../users/userHome";
-import logOut from "../users/logOut";
-import manageUser from "../users/manageUser";
+import TakeExam from "../exams/TakeExam";
+import CreateExam from "../exams/CreateExam";
+import ManageExam from "../exams/ManageExam";
+import ManageAssignment from "../assignement/ManageAssignment";
+import UserHome from "../users/UserHome";
+import LogOut from "../users/LogOut";
+import ManageUser from "../users/ManageUser";
+import ShowTest from "../exams/ShowTest";
+import ShowResults from "../exams/ShowResults";
 
 
 export default function Routes(props) {
@@ -25,21 +26,26 @@ export default function Routes(props) {
             <div>
                 <Switch>
 
-                    <Route exact path="/exam/takeExam/" component={takeExam}>
+                    <Route   path="/exam/takeExam/" component={TakeExam}>
                     </Route>
-                    <LoginValid exact path="/exam/createExam/" componenet={createExam}>
+                    <LoginValid exact path="/exam/createExam/" componenet={CreateExam}>
                     </LoginValid>
-                    <LoginValid exact path="/exam/manageExam/" componenet={manageExam}>
+                    <LoginValid exact path="/exam/manageExam/" componenet={ManageExam}>
                     </LoginValid>
-                    <LoginValid exact path="/assignemnt/manageAssignment" componenet={manageAssignment}>
+                    <LoginValid exact path="/assignemnt/manageAssignment" componenet={ManageAssignment}>
                     </LoginValid>
-                    <Route exact path="/logOut/" component={logOut}>
+                    <LoginValid   path="/exam/ShowTest" componenet={ShowTest}>
+                    </LoginValid>
+                       <Route exact path="/logOut/" component={LogOut}>
                     </Route>
-                    <LoginValid exact path="/user/home" componenet={userHome}>
+                    <LoginValid exact path="/user/home" componenet={UserHome}>
                     </LoginValid>
-                    <LoginValid exact path="/user/manage" componenet={manageUser}>
+                    <LoginValid exact path="/user/manage" componenet={ManageUser}>
                     </LoginValid>
-                </Switch>
+                    <LoginValid exact path="/user/exams/results" componenet={ShowResults}>
+                    </LoginValid>
+             
+                       </Switch>
             </div>
         </Router>
     );
@@ -50,7 +56,12 @@ function LoginValid(props) {
     let allow=true;
   if (localStorage != null && (localStorage.getItem("user") === null || localStorage.getItem("user") === undefined)) {
       let user= JSON.parse( localStorage.getItem("user"));
-      allow=user.loginValid;
+      if(user==null)
+     {
+        allow=false
+     } else{
+        allow=user.loginValid;
+     }
     }
     return (
         <Route

@@ -1,10 +1,10 @@
 import React from "react";
 
 
-let logOut =(props)=>{
+let LogOut =(props)=>{
     return <div>
 
     </div>;
 }
 
-export default logOut;
+export default LogOut;
