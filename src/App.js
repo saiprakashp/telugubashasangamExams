@@ -38,7 +38,7 @@ function App() {
             localStorage.removeItem("user");
             let user = {
                 'loginValid': true,
-                'uname': 'sai',
+                'uname': 'syamala',
                 'token': 'hUotCMLVN0M'
             };
             localStorage.setItem("user", JSON.stringify(user));
