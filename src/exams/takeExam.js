@@ -37,7 +37,7 @@ let TakeExam = (props) => {
             if (jsonData == null && localStorage != null && !(localStorage.getItem("user") === null || localStorage.getItem("user") === undefined)) {
                 let user = JSON.parse(localStorage.getItem("user"));
                 testid = (location.search != null) ? (location.search.substr(1, location.search.length)) : '';
-                axios.post('http://localhost:4000/user/exam/gettest', {
+                axios.post('https://telugubashasangamba.herokuapp.com/user/exam/gettest', {
                     "user": user.uname,
                     "token": user.token,
                     "examname": testid
@@ -93,7 +93,7 @@ let TakeExam = (props) => {
             }
 
          
-            axios.post('http://localhost:4000/user/save/test', {
+            axios.post('https://telugubashasangamba.herokuapp.com/user/save/test', {
                 "user":  document.getElementById("studName").value,
                 "name":jsonData.name,
                 "attempts": 1,

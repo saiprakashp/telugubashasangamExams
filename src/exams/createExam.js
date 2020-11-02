@@ -49,7 +49,7 @@ const CreateExam = (props) => {
                 "passquestion": (document.getElementById("passquestion") != null) ? document.getElementById("passquestion").value : 2,
             }
           
-            axios.post('http://localhost:4000/user/saveExam', {
+            axios.post('https://telugubashasangamba.herokuapp.com/user/saveExam', {
                 ...data
             }
             )

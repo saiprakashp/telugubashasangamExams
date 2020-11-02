@@ -52,7 +52,7 @@ let ShowTest = (props) => {
             if (jsonData == null && localStorage != null && !(localStorage.getItem("user") === null || localStorage.getItem("user") === undefined)) {
                 let user = JSON.parse(localStorage.getItem("user"));
                 testid = (location.search != null) ? (location.search.substr(1, location.search.length)) : '';
-                axios.post('http://localhost:4000/user/exam/getExam', {
+                axios.post('https://telugubashasangamba.herokuapp.com/user/exam/getExam', {
                     "user": user.uname,
                     "token": user.token,
                     "examname": testid
@@ -77,7 +77,7 @@ let ShowTest = (props) => {
             data['token'] = user.token
             data['user'] = user.uname
 
-            axios.post('http://localhost:4000/user/updateExam', {
+            axios.post('https://telugubashasangamba.herokuapp.com/user/updateExam', {
                 data
             }
             )
