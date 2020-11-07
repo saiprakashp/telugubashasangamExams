@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import axios from "axios";
+import { SERVICE_URL } from "../utils/Services";
 
 let ShowTest = (props) => {
     let location = useLocation();
@@ -52,7 +53,7 @@ let ShowTest = (props) => {
             if (jsonData == null && localStorage != null && !(localStorage.getItem("user") === null || localStorage.getItem("user") === undefined)) {
                 let user = JSON.parse(localStorage.getItem("user"));
                 testid = (location.search != null) ? (location.search.substr(1, location.search.length)) : '';
-                axios.post('https://telugubashasangamba.herokuapp.com/user/exam/getExam', {
+                axios.post(SERVICE_URL+ '/user/exam/getExam', {
                     "user": user.uname,
                     "token": user.token,
                     "examname": testid
@@ -76,8 +77,8 @@ let ShowTest = (props) => {
             var data = jsonData.exams[0];
             data['token'] = user.token
             data['user'] = user.uname
-
-            axios.post('https://telugubashasangamba.herokuapp.com/user/updateExam', {
+  
+            axios.post(SERVICE_URL+ '/user/updateExam', {
                 data
             }
             )
@@ -96,7 +97,10 @@ let ShowTest = (props) => {
         var json = {...jsonData};
         var data = [];
 
-        if (json != null && json.exams != null) {
+        if (json != null && 
+            
+            
+            json.exams != null) {
 
             let len = json.exams[0].questions[json.exams[0].questions.length - 1].queId;
             for (var i = 1; i <= totalQue; i++) {

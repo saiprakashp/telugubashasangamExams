@@ -1,6 +1,7 @@
 import React, { createRef, useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router";
 import axios from 'axios';
+import { SERVICE_URL } from "../utils/Services";
 
 let TakeExam = (props) => {
     let location = useLocation();
@@ -10,6 +11,7 @@ let TakeExam = (props) => {
     const [arr, setArr] = useState(null);
     const [showAns, setShowNas] = useState(false);
     const [queLen, setQueLen] = useState(-1);
+    const [currentAttemp, setcurrentAttemp] = useState(0);
     const [answers, setAnswers] = useState([]);
     const [showRes, setShowRes] = useState(null);
     const handleInputChange = (type, value, index, id) => {
@@ -31,13 +33,21 @@ let TakeExam = (props) => {
                 break;
 
         }
+        let attemp=currentAttemp+1;
+
+        console.log(attemp)
+        if(attemp==queLen){
+           
+            saveTest();  
+        }
+        setcurrentAttemp(attemp)
     }
     useEffect(
         () => {
             if (jsonData == null && localStorage != null && !(localStorage.getItem("user") === null || localStorage.getItem("user") === undefined)) {
                 let user = JSON.parse(localStorage.getItem("user"));
                 testid = (location.search != null) ? (location.search.substr(1, location.search.length)) : '';
-                axios.post('https://telugubashasangamba.herokuapp.com/user/exam/gettest', {
+                axios.post(SERVICE_URL+ '/user/exam/gettest', {
                     "user": user.uname,
                     "token": user.token,
                     "examname": testid
@@ -93,7 +103,7 @@ let TakeExam = (props) => {
             }
 
          
-            axios.post('https://telugubashasangamba.herokuapp.com/user/save/test', {
+            axios.post(SERVICE_URL+ '/user/save/test', {
                 "user":  document.getElementById("studName").value,
                 "name":jsonData.name,
                 "attempts": 1,
@@ -104,7 +114,7 @@ let TakeExam = (props) => {
             }
             )
                 .then((response) => {
-                    report.message=response.data.message;
+                    report.message='Your Exam results are saved and shared with your teacher';
                     setShowRes(report)
                     setShowNas(true)
 
@@ -154,19 +164,19 @@ let TakeExam = (props) => {
 
     return <div>
         <button className=" mt-2 mb-2 btn btn-primary text-white" disabled={showRes!=null}  onClick={() => saveTest()}>Save Test</button>
-        <div className="mt-2 mb-3">
-            <div className=" w-25 m-auto h-50 input-group input-group-sm mb-3">
+        <div className="mt-2  mb-3">
+            <div className=" w-auto m-auto h-50 input-group input-group-sm mb-3">
                 <div className="input-group-prepend">
                     <span className=" mb-3 input-group-text" id="inputGroup-sizing-sm">Student name: </span>
                 </div>
-                <input type="text" id="studName" className=" mb-3 form-control" aria-label="studName"
+                <input type="text" id="studName" className=" mb-3  form-control" aria-label="studName"
                     aria-describedby="inputGroup-sizing-sm"  ></input>
             </div>
 
 
             {(jsonData != null) ?
                 <div>
-                    <div key={'Title'} className=" w-25 m-auto h-50 input-group input-group-sm mb-3">
+                    <div key={'Title'} className=" w-auto m-auto h-50 input-group input-group-sm mb-3">
                         <div className="input-group-prepend">
                             <span className=" mb-3 input-group-text" id="inputGroup-sizing-sm">Exam Name: </span>
                         </div>
@@ -183,7 +193,7 @@ let TakeExam = (props) => {
                 </div> : null
             }
 
-            <div className=" w-25 m-auto h-50 input-group input-group-sm mb-3">
+            <div className=" w-auto m-auto h-50 input-group input-group-sm mb-3">
 
                 <div className="input-group-prepend">
                     <span className=" mb-3 input-group-text" id="inputGroup-sizing-sm">Pass Marks: </span>
@@ -193,11 +203,9 @@ let TakeExam = (props) => {
 
         {(showRes!=null)?
                 <div className="alert alert-dark container h-auto" >
-                <h4><label><b>Result:</b> </label>{
-                    showRes.result
-                }</h4>  <h4><label><b>Correct:</b> </label>{
+               <h4><label><b>Marks Scored:</b> </label>{
                     showRes.correct
-                }</h4>  <h4><label><b>In-Correct:</b> </label>{
+                } / {
                     showRes.incorract
                 }</h4>
                <h4><label><b> Status :</b> </label>{
@@ -211,7 +219,7 @@ let TakeExam = (props) => {
                 (jsonData != null && jsonData.questions != null && jsonData.questions) ? jsonData.questions
                     .map(
                         (value, index) => {
-                            return (<div key={index} className="card w-50   m-auto h-auto">
+                            return (<div key={index} className="card w-auto m-auto h-auto">
                                 <div className="card-body">
                                     <div><small className="align-top">{"Q" + value.queId + ") "}</small>
                                         <textarea id={"que_" + value.queId} rows="5" cols="80" value={value.questionTitle} disabled

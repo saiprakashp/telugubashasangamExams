@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { month_names, month_names_short } from "./Util";
 import { testTemplate } from "./Util";
 import axios from "axios";
+import { SERVICE_URL } from "../utils/Services";
 
 const CreateExam = (props) => {
     let totalQue = 0;
@@ -49,7 +50,7 @@ const CreateExam = (props) => {
                 "passquestion": (document.getElementById("passquestion") != null) ? document.getElementById("passquestion").value : 2,
             }
           
-            axios.post('https://telugubashasangamba.herokuapp.com/user/saveExam', {
+            axios.post(SERVICE_URL+'/user/saveExam', {
                 ...data
             }
             )

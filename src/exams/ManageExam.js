@@ -3,6 +3,7 @@ import {month_names} from './Util';
 import {useHistory} from "react-router";
 import {Switch} from "@material-ui/core";
 import axios from 'axios';
+import { SERVICE_URL } from "../utils/Services";
 
 let ManageExam = (props) => {
     let history = useHistory();
@@ -10,7 +11,7 @@ let ManageExam = (props) => {
     const disbleOrEnableExam = (id, flag, index) => {
         if (localStorage != null && !(localStorage.getItem("user") === null || localStorage.getItem("user") === undefined)) {
             let user = JSON.parse(localStorage.getItem("user"));
-            axios.post('https://telugubashasangamba.herokuapp.com/user/update/exam', {
+            axios.post(SERVICE_URL+'/user/update/exam', {
                     "user": user.uname,
                     "token": user.token,
                     "id": id,
@@ -32,7 +33,7 @@ let ManageExam = (props) => {
          if(res == null)   if (localStorage != null && !(localStorage.getItem("user") === null || localStorage.getItem("user") === undefined)) {
                 let user = JSON.parse(localStorage.getItem("user"));
 
-                axios.post('https://telugubashasangamba.herokuapp.com/user/getExams', {
+                axios.post(SERVICE_URL+'/user/getExams', {
                         "user": user.uname,
                         "token": user.token,
                     }

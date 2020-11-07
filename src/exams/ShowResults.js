@@ -3,6 +3,7 @@ import { month_names } from './Util';
 import { useHistory } from "react-router";
 import { Switch } from "@material-ui/core";
 import axios from 'axios';
+import { SERVICE_URL } from "../utils/Services";
 
 let ShowResults = (props) => {
     let history = useHistory();
@@ -15,7 +16,7 @@ let ShowResults = (props) => {
             if (res == null) if (localStorage != null && !(localStorage.getItem("user") === null || localStorage.getItem("user") === undefined)) {
                 let user = JSON.parse(localStorage.getItem("user"));
 
-                axios.post('https://telugubashasangamba.herokuapp.com/user/getExams', {
+                axios.post(SERVICE_URL+ '/user/getExams', {
                     "user": user.uname,
                     "token": user.token,
                 }
@@ -32,7 +33,7 @@ let ShowResults = (props) => {
     )
     function fetchResults(exam) {
 
-        axios.post('https://telugubashasangamba.herokuapp.com/user/getSudenExams', {
+        axios.post(SERVICE_URL+ '/user/getSudenExams', {
             "examname": exam
         }
         )
@@ -78,8 +79,7 @@ let ShowResults = (props) => {
                                 <h6>Student Name: {val.name}</h6>
                                 <h6>Marks:</h6>
                                 <p>Result: {val.marks.result}</p>
-                                <p>Correct: {val.marks.correct}</p>
-                                <p>In-Correct: {val.marks.incorract}</p>
+                                <p>Marks Scored: {val.marks.correct} / {val.marks.incorract}</p>
                             </div>
                         </div>
                     })
