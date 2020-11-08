@@ -208,7 +208,7 @@ let TakeExam = (props) => {
                <h4><label><b>Marks Scored:</b> </label>{
                     showRes.correct
                 } / {
-                    showRes.queLen
+                   queLen
                 }</h4>
                <h4><label><b> Status :</b> </label>{
                     showRes.message
