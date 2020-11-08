@@ -79,7 +79,7 @@ let ShowResults = (props) => {
                                 <h6>Student Name: {val.name}</h6>
                                 <h6>Marks:</h6>
                                 <p>Result: {val.marks.result}</p>
-                                <p>Marks Scored: {val.marks.correct} / {val.marks.incorract}</p>
+                                <p>Marks Scored: {val.marks.correct} / {val.marks.queLen}</p>
                             </div>
                         </div>
                     })

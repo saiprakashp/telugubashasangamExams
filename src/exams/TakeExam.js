@@ -83,7 +83,8 @@ let TakeExam = (props) => {
                 result: "Fail",
                 message: "NA",
                 correct: 0,
-                incorract: 0
+                incorract: 0,
+                quelen:queLen
             }
 
             jsonData.questions.map((val, key) => {
@@ -124,7 +125,8 @@ let TakeExam = (props) => {
                         result: "NA",
                         message: "NA",
                         correct: 0,
-                        incorract: 0
+                        incorract: 0,
+                        quelen:queLen
                     }
                     report.message='Contact Your Class Teacher Exam Not Saved';
                     setShowRes(report)
@@ -206,7 +208,7 @@ let TakeExam = (props) => {
                <h4><label><b>Marks Scored:</b> </label>{
                     showRes.correct
                 } / {
-                    showRes.incorract
+                    showRes.queLen
                 }</h4>
                <h4><label><b> Status :</b> </label>{
                     showRes.message
