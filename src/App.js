@@ -38,7 +38,7 @@ function App() {
             localStorage.removeItem("user");
             let user = {
                 'loginValid': true,
-                'uname': 'sai',
+                'uname': 'syamala',
                 'token': 'hUotCMLVN0M'
             };
             localStorage.setItem("user", JSON.stringify(user));
@@ -59,7 +59,7 @@ const removeStorage=()=>{alert("You are about to logout")
 
         <div className="App">
 
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <nav className="navbar navbar-expand-lg navbar-light bg-light w-auto">
                 <a className="navbar-brand" href="/">Telugu Basha Sangam</a>
                 <button className="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
